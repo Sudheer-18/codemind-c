@@ -1,50 +1,52 @@
 #include<stdio.h>
-int pall(int n)
+#include<stdbool.h>
+bool ispalindrome(int n)
 {
-    int r,s=0;
-    r=n;
-    while(n>0)
+    int r,s=0,temp;
+    temp=n;
+    while(n!=0)
     {
-        s=s*10+n%10;
+        r=n%10;
+        s=s*10+r;
         n=n/10;
     }
-    if(r==s)
+    if(s==temp)
     {
-        return 1;
+        return true;
     }
-    else
-    {
-        return 0;
-    }
+    return false;
 }
 int main()
 {
-    int x,y,n;
+    int n,i,j;
     scanf("%d",&n);
-    for(x=n-1;;x--)
+    for(i=n+1;;i++)
     {
-        if(pall(x))
+        if(ispalindrome(i))
+        {
+             break;
+        }
+    }
+    for(j=n-1;;j--)
+    {
+        if(ispalindrome(j))
         {
             break;
         }
     }
-    for(y=n+1;;y++)
+    int d1,d2;
+    d1=n-j;
+    d2=i-n;
+    if(d1>d2)
     {
-        if(pall(y))
-        {
-            break;
-        }
+        printf("%d",i);
     }
-    if(x-n==n-y)
+    else if(d1<d2)
     {
-        printf("%d %d",x,y);
-    }
-    else if(x-n>n-y)
-    {
-        printf("%d",x);
+        printf("%d",j);
     }
     else
     {
-        printf("%d",y);
+        printf("%d %d",j,i);
     }
 }
